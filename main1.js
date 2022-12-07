@@ -30,12 +30,17 @@ function onSubmit(e) {
         msg.classList.add('error');
         msg.innerHTML='Please Enter Data';
     }else {
+        
        const li = document.createElement('li');
        li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
        userList.appendChild(li);
 
-       localStorage.setItem('Name', nameInput.value);
-       localStorage.setItem('mail', emailInput.value);
+       let object = {
+        Name: nameInput.value ,
+        Email: emailInput.value
+      };
+      let object_serialized = JSON.stringify(object);
+      localStorage.setItem("myObj",object_serialized);
        
        nameInput.value='';
        emailInput.value='';
