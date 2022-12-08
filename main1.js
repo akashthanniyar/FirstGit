@@ -40,7 +40,7 @@ function onSubmit(e) {
         Email: emailInput.value
       };
       let object_serialized = JSON.stringify(object);
-      localStorage.setItem("myObj",object_serialized);
+      localStorage.setItem(object.Email,object_serialized);
        
        nameInput.value='';
        emailInput.value='';
