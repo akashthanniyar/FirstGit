@@ -9,24 +9,76 @@
 <body>
     <script> 
 
-    var multiply = function (a,b) {
-        console.log(a*b);
-    }
+    // var multiply = function (a,b) {
+    //     console.log(a*b);
+    // }
 
-    var multiplyByTwo = multiply.bind(this,2);
-    multiplyByTwo(3);
+    // var multiplyByTwo = multiply.bind(this,2);
+    // multiplyByTwo(3);
 
-    var multiplyByTwo = multiply.bind(this,2);
-    multiplyByTwo(5);
+    // var multiplyByTwo = multiply.bind(this,2);
+    // multiplyByTwo(5);
 
-    var multiply = function x(a){
-        return function y(b){
-            console.log(a*b);
+    // var multiply = function x(a){
+    //     return function y(b){
+    //         console.log(a*b);
+    //     }
+    // }
+    // var multiplyByTwo = multiply(4);
+    // multiplyByTwo(5);
+
+    // const name = (arr)=>{
+    //     var count =0;
+    //     return () => {
+    //         console.log("Hello" + " " + arr[count]);
+    //         count++;
+    //     }
+    // }
+    // let fun = name(["Ram","Shyam"]);
+    //  fun()// Print Hello Ram
+    //  fun()//print Hello Shyam
+
+    class student {
+        static count = 0;
+        constructor (name,age,phoneNumber,boardMarks) {
+            this.name= name;
+            this.age=age;
+            this.phoneNumber=phoneNumber;
+            this.boardMarks=boardMarks;
+            student.count=student.count+1;
         }
-    }
-    var multiplyByTwo = multiply(4);
-    multiplyByTwo(5);
+    //     check() {
+    //         if(this.boardMarks>=40){
+    //             console.log("egligible");
+    //         }else {
+    //             console.log(" not egligible");
+    //         }
+    // } 
 
+    setPlacemenAge(minPlacementAge) {
+        return (minMarks) => {
+            if(this.boardMarks > minMarks && this.age > minPlacementAge ) {
+        console.log(this.name);
+    }else {
+        return;
+        }       
+    }
+  }
+}
+    var student1 = new student ("John",15,12345,42);
+    var student2 = new student ("Jerry",17,345,39);
+    var student3 = new student ("Jill",16,1290345,35);
+    var student4 = new student ("Jack",19,12086345,41);
+    var student5 = new student ("Peter",20,1234511,43);
+    student1.setPlacemenAge(18)(40);
+    student2.setPlacemenAge(18)(40);
+    student3.setPlacemenAge(18)(40);
+    student4.setPlacemenAge(18)(40);
+    student5.setPlacemenAge(18)(40);
+
+   
+
+ 
 
 
     </script>
