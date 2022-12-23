@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+
+    <h1 id = "Event Listners">Event Listners</h1>
+    <button id="Click Me" >Click Me</button> 
     <script> 
 
     // var multiply = function (a,b) {
@@ -38,15 +41,15 @@
     //  fun()// Print Hello Ram
     //  fun()//print Hello Shyam
 
-    class student {
-        static count = 0;
-        constructor (name,age,phoneNumber,boardMarks) {
-            this.name= name;
-            this.age=age;
-            this.phoneNumber=phoneNumber;
-            this.boardMarks=boardMarks;
-            student.count=student.count+1;
-        }
+    // class student {
+    //     static count = 0;
+    //     constructor (name,age,phoneNumber,boardMarks) {
+    //         this.name= name;
+    //         this.age=age;
+    //         this.phoneNumber=phoneNumber;
+    //         this.boardMarks=boardMarks;
+    //         student.count=student.count+1;
+        
     //     check() {
     //         if(this.boardMarks>=40){
     //             console.log("egligible");
@@ -55,30 +58,48 @@
     //         }
     // } 
 
-    setPlacemenAge(minPlacementAge) {
-        return (minMarks) => {
-            if(this.boardMarks > minMarks && this.age > minPlacementAge ) {
-        console.log(this.name);
-    }else {
-        return;
-        }       
-    }
-  }
+//     setPlacemenAge(minPlacementAge) {
+//         return (minMarks) => {
+//             if(this.boardMarks > minMarks && this.age > minPlacementAge ) {
+//         console.log(this.name);
+//     }else {
+//         return;
+//         }       
+//     }
+//   }
+// }
+//     var student1 = new student ("John",15,12345,42);
+//     var student2 = new student ("Jerry",17,345,39);
+//     var student3 = new student ("Jill",16,1290345,35);
+//     var student4 = new student ("Jack",19,12086345,41);
+//     var student5 = new student ("Peter",20,1234511,43);
+//     student1.setPlacemenAge(18)(40);
+//     student2.setPlacemenAge(18)(40);
+//     student3.setPlacemenAge(18)(40);
+//     student4.setPlacemenAge(18)(40);
+//     student5.setPlacemenAge(18)(40);
+
+// document.getElementById("Click Me").addEventListener("click",function xyz() {
+//      console.log("Button Clicked" );
+// })
+// let DOMCONTENTLOADED = addEventListener("",function abc(){
+//     console.log("DOM has loaded");
+// })
+// DOMCONTENTLOADED();
+let studentobj = {
+'yash': 26,
+'vaibhav': 24,
+'rajesh' : 25,
 }
-    var student1 = new student ("John",15,12345,42);
-    var student2 = new student ("Jerry",17,345,39);
-    var student3 = new student ("Jill",16,1290345,35);
-    var student4 = new student ("Jack",19,12086345,41);
-    var student5 = new student ("Peter",20,1234511,43);
-    student1.setPlacemenAge(18)(40);
-    student2.setPlacemenAge(18)(40);
-    student3.setPlacemenAge(18)(40);
-    student4.setPlacemenAge(18)(40);
-    student5.setPlacemenAge(18)(40);
+function findaverageage(studentObj){
 
-   
+    let ageValues = Object.values(studentobj);
+    let averageAge = (ageValues[0]+ageValues[1]+ageValues[2])/3;
 
- 
+return averageAge;
+
+}
+console.log("Average Age = " + " " + findaverageage());
 
 
     </script>
