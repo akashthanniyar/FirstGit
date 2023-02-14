@@ -1,8 +1,18 @@
-<div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-    <div id="myDropdown" class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div>
+<script>
+    var stack = [];
+console.log("Stack:[]" + stack );
+for(var i=40;i<=60;i=i+10)
+{
+  console.log("push"+ " " + i)
+  stack.push(i);
+  console.log(stack);
+}
+while(stack.length){
+  console.log(stack[stack.length-1]);
+   stack.pop();
+   console.log(stack );
+}
+if(!stack.length){
+      console.log("it Is Empty Stack");
+    }
+</script>
