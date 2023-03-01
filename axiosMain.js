@@ -113,7 +113,7 @@ axios.all([
       .then((res)=>showOutput(res))
       .catch(err=>{
         if(err.response){
-          //server response with some error insted of the data
+          //server response with some error insted of the data  
           console.log(err.response.data);
           console.log(err.response.status); 
           console.log(err.response.headers);
