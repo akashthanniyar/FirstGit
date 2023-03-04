@@ -59,15 +59,16 @@ function onSubmit(e) {
         })
     }
     window.addEventListener("DOMContentLoaded", () => {
-        const localStorageObj = localStorage;
-        const localstoragekeys  = Object.keys(localStorageObj)
-
-        for(var i =0; i< localstoragekeys.length; i++){
-            const key = localstoragekeys[i] 
-            const userDetailsString = localStorageObj[key];
-            const userDetailsObj = JSON.parse(userDetailsString);
-            showNewUserOnScreen(userDetailsObj)
-        }
+        axios.get("https://crudcrud.com/api/c5882fafc4004e1eb286971f0ca40b74/appointmentData")
+        .then((response)=>{
+          for(var i=0;i<response.data.length;i++){
+            showNewUserOnScreen(response.data[i]);
+          }
+        })
+        .catch((err)=> {
+          document.body.innerHTML =   document.body.innerHTML + " Something Went Wrong";
+          console.log(err);
+        })
     })
     function showNewUserOnScreen(user){
       const parentNode=document.getElementById("users");
