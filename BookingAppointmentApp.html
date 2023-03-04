@@ -81,10 +81,16 @@ function onSubmit(e) {
       parentNode.innerHTML =  parentNode.innerHTML + childHtml;
     }   
 function deleteUser(Email) {
-    localStorage.removeItem(Email);
+  axios.delete("https://crudcrud.com/api/c5882fafc4004e1eb286971f0ca40b74/appointmentData/6403406ba997a303e87756c5")
+  .then((response)=>{
+            console.log("Delete Suceessfull");
+          })
+        .catch((err)=> {
+          document.body.innerHTML =   document.body.innerHTML + " Something Went Wrong";
+          console.log(err);
+        })
     removeUserFromScreen(Email);
 }
-
 function removeUserFromScreen(Email) { 
     const parentNode=document.getElementById("users");
     const childNodeToBeDeleted  = document.getElementById(Email);
