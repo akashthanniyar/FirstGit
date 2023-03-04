@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Booking Application</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Booking Application</h1>
+    </header>
+
+    <section class="container">
+      <form id="my-form">
+        <h1>Book Appointment</h1>
+        <div class="msg"></div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email">
+        </div>
+        <div>
+          <label for="email">Phone Number:</label>
+          <input type="text" id="phoneNumber" name="phoneNumber">
+        </div>
+        <input class="btn" type="submit" value="Submit">
+      </form>
+      <ul id="users"></ul>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js "></script>
+<script> 
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const PhoneNumberInput = document.querySelector('#phoneNumber');
+
+myForm.addEventListener('submit',onSubmit);
+
+function onSubmit(e) {
+    e.preventDefault();
+       let object = {
+        Name: nameInput.value ,
+        Email: emailInput.value,
+        PhoneNumber: PhoneNumberInput.value
+      };
+        axios.post("https://crudcrud.com/api/c5882fafc4004e1eb286971f0ca40b74/appointmentData",object)
+        .then((response)=>{
+            showNewUserOnScreen(response.data);
+            console.log(response);
+        })
+        .catch((err)=>{
+            document.body.innerHTML =   document.body.innerHTML + " Something Went Wrong";
+            console.log(err) 
+        })
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+        const localStorageObj = localStorage;
+        const localstoragekeys  = Object.keys(localStorageObj)
+
+        for(var i =0; i< localstoragekeys.length; i++){
+            const key = localstoragekeys[i] 
+            const userDetailsString = localStorageObj[key];
+            const userDetailsObj = JSON.parse(userDetailsString);
+            showNewUserOnScreen(userDetailsObj)
+        }
+    })
+    function showNewUserOnScreen(user){
+      const parentNode=document.getElementById("users");
+      const childHtml = `<li id=${user.Email}>${user.Name} : ${user.Email} : ${user.PhoneNumber}
+                         <button onclick=deleteUser('${user.Email}')>
+                          Delete User</button>
+                          <button onclick=editUser('${user.Email}','${user.Name}','${user.PhoneNumber})>
+                          Edit User</button></li>`;
+                          
+      parentNode.innerHTML =  parentNode.innerHTML + childHtml;
+    }   
+function deleteUser(Email) {
+    localStorage.removeItem(Email);
+    removeUserFromScreen(Email);
+}
+
+function removeUserFromScreen(Email) { 
+    const parentNode=document.getElementById("users");
+    const childNodeToBeDeleted  = document.getElementById(Email);
+    parentNode.removeChild(childNodeToBeDeleted);
+}
+
+function editUser(Email,Name) {
+    document.getElementById('email').value=Email;
+    document.getElementById('name').value=Name;
+    document.getElementById('phoneNumber').value=PhoneNumber;
+    deleteUser(Email);
+}
+</script>
+</body>
+</html>
+
