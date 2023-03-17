@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Shop</title>
+    <h1> Candy Shop Seller Dashboard</h1>
+</head>
+<body>
+    <form id="candy-stock">
+        <lable for="name" id="name-label">Candy Name:</lable>
+        <input type="text" id="name" name="candy-name">
+        <lable for="descp" id="descp-label">Description:</lable>
+        <input type="text" id="descp" name="candy-descp">
+        <lable for="price" id="price-label">Price:</lable>
+        <input type="text" id="price" name="candy-price">
+        <lable for="qty" id="qty-label">Quantity:</lable>
+        <input type="text" id="qty" name="candy-qty">
+        <input class="button" type="submit" value="Add Item">
+    </form>
+    <ul id="candy-list"></ul>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+<script>
+
+let myForm = document.getElementById("candy-stock");
+let nameInput = document.getElementById("name");
+let descpInput = document.getElementById("descp");
+let priceInput = document.getElementById("price");
+let qtyInput = document.getElementById("qty");
+
+myForm.addEventListener("submit",onSubmit);
+
+function onSubmit(e){
+    e.preventDefault();
+    let candies = {
+        name : nameInput.value,
+        descp : descpInput.value,
+        price : priceInput.value,
+        qty : qtyInput.value
+    }
+    axios.post("https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails",candies)
+    .then((response)=>{
+        showEntryOnScreen(response.data);
+        nameInput.value="";
+        descpInput.value="";
+        priceInput.value="";
+        qtyInput.value="";
+    }).catch((err)=>{
+        document.body.innerHTML+= "Something Went Wrong"
+    })
+}
+
+function showEntryOnScreen(candy){
+
+    let parentNode = document.getElementById("candy-list");
+    let childHtml = `<li id=${candy._id}> ${candy.name} : ${candy.descp} : ${candy.price} : ${candy.qty}
+        <button onClick=buyOne("${candy._id}")>Buy One</button>
+        <button onClick=buyTwo("${candy._id}")>Buy Two</button>
+        <button onClick=buyThree("${candy._id}")>Buy Three</button>
+        </li>`
+        parentNode.innerHTML+=childHtml;
+}
+
+window.addEventListener("DOMContentLoaded",()=>{
+  axios.get("https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails")
+  .then((response)=>{
+    for(var i=0;i<response.data.length;i++){
+        showEntryOnScreen(response.data[i]);
+    }
+  }).catch((err)=>{
+        document.body.innerHTML+= "Something Went Wrong"
+    })
+})
+
+function buyOne(candyId) {
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
+    .then((response)=>{
+        if(response.data.qty>1){
+            axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-1
+        })
+        }else {
+            document.body.innerHTML+= "Candy Sold Out"
+        }    
+    }).catch((err)=>{
+            document.body.innerHTML+= "Something Went Wrong"
+    })
+}
+function buyTwo(candyId) {
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
+    .then((response)=>{
+        if(response.data.qty>2){
+            axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-2
+        })
+        }else {
+            document.body.innerHTML+= "Quantity Not Available"
+        }      
+    }).catch((err)=>{
+        document.body.innerHTML+= "Something Went Wrong"
+    })
+
+}
+function buyThree(candyId) {
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
+    .then((response)=>{
+        if(response.data.qty>3){
+            axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-3
+        })
+        }else{
+            document.body.innerHTML+= "Quantity Not Available"
+        }
+    }).catch((err)=>{
+        document.body.innerHTML+= "Something Went Wrong"
+    })
+}
+</script>
+</html>
