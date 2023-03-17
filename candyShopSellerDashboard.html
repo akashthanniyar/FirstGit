@@ -40,7 +40,7 @@ function onSubmit(e){
         price : priceInput.value,
         qty : qtyInput.value
     }
-    axios.post("https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails",candies)
+    axios.post("https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails",candies)
     .then((response)=>{
         showEntryOnScreen(response.data);
         nameInput.value="";
@@ -64,7 +64,7 @@ function showEntryOnScreen(candy){
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
-  axios.get("https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails")
+  axios.get("https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails")
   .then((response)=>{
     for(var i=0;i<response.data.length;i++){
         showEntryOnScreen(response.data[i]);
@@ -75,42 +75,43 @@ window.addEventListener("DOMContentLoaded",()=>{
 })
 
 function buyOne(candyId) {
-    axios.get(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`)
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
     .then((response)=>{
-       let candies= response.data;
-        axios.put(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`,{
-            name : `${response.data.name}`,
-            descp : `${response.data.descp}`,
-            price : `${response.data.price}`,
-            qty : `${response.data.qty-1}`
+        axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-1
+        })
+    }).catch((err)=>{
+            document.body.innerHTML+= "Something Went Wrong"
+    })
+}
+function buyTwo(candyId) {
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
+    .then((response)=>{
+        axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-2
         })
     }).catch((err)=>{
         document.body.innerHTML+= "Something Went Wrong"
     })
-}
-function buyTwo(candyId) {
-    axios.get(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`)
-    .then((response)=>{
-       let candies= response.data;
-        axios.put(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`,{
-            name : `${response.data.name}`,
-            descp : `${response.data.descp}`,
-            price : `${response.data.price}`,
-            qty : `${response.data.qty-2}`
-        })
-    })
 
 }
 function buyThree(candyId) {
-    axios.get(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`)
+    axios.get(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`)
     .then((response)=>{
-       let candies= response.data;
-        axios.put(`https://crudcrud.com/api/ffe46875f0694b558e64f60a53ec14a0/candyStockDetails/${candyId}`,{
-            name : `${response.data.name}`,
-            descp : `${response.data.descp}`,
-            price : `${response.data.price}`,
-            qty : `${response.data.qty-3}`
+        axios.put(`https://crudcrud.com/api/35a9226494224863855fd8d2d3dd0c84/candyStockDetails/${candyId}`,{
+            name : response.data.name,
+            descp : response.data.descp,
+            price : response.data.price,
+            qty : response.data.qty-3
         })
+    }).catch((err)=>{
+        document.body.innerHTML+= "Something Went Wrong"
     })
 
 }
